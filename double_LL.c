@@ -1,3 +1,18 @@
+/*
+* @file double_LL.c
+* @brief Doubly Linked List Library
+*
+* This source file provides useful functions for creating and using doubly 
+* linked lists. This code can be run on any Linux - based system
+*
+* Tools used: GCC Compiler, GDB
+* Command to compile from source: gcc double_LL.c -o double_LL -Wall -Werror
+* @author Rishi Soni
+* @date September 6 2017
+* @version 1.0
+*
+*/
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -81,14 +96,14 @@ status add_node(struct Node **head, uint32_t data, uint8_t index)
 
 uint32_t size(struct Node **head)
 {
-    uint32_t i;
+    uint32_t num;
     struct Node *temp = *head;
     while(temp != NULL)
     {
         temp = temp->next;
-        i++;
+        num++;
     }
-    return i;
+    return num;
 }
 
 uint8_t * search(struct Node**head, uint32_t data)
