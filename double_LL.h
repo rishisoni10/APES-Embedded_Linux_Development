@@ -16,7 +16,10 @@
 #ifndef __DOUBLE_LL_H_
 #define __DOUBLE_LL_H_
 
-
+/**
+* @brief Structure for the doubly linked list
+*
+*/
 struct Node
 {
     uint32_t data;
@@ -24,6 +27,10 @@ struct Node
     struct Node *next;
 };
 
+/**
+* @brief Enum for function returns
+*
+*/
 typedef enum
 {
     SUCCESS,
