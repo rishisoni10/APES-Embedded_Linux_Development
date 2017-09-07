@@ -48,6 +48,8 @@ int main(void)
     printf("Node index is %d\n", *index);
 
     stat = destroy(&head);
+    display(&head);
+
 }
 
 status add_node(struct Node **head, uint32_t data, uint8_t index)
@@ -186,5 +188,6 @@ status destroy(struct Node **head)
         free(temp);
         temp = temp2;
     }
+    *head = NULL;
     return SUCCESS;
 }
