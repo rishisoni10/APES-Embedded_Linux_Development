@@ -1,18 +1,38 @@
+/*
+* @file double_LL.c
+* @brief Circular Buffer Library
+*
+* This source file provides useful functions for creating and using circular 
+* buffers. This code can be run on any Linux - based system
+*
+* Tools used: GCC Compiler, GDB
+* Command to compile from source: gcc circbuff.c -o circbuff -Wall -Werror
+*
+* @Code re-used from ESE course. Modified for this assignment
+*
+* @Link to original code: https://github.com/rishisoni10/ECEN5013/blob/Project2/Sources/cirbuf.c
+*
+* @author Rishi Soni
+* @date September 7 2017
+* @version 1.0
+*
+*/
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "circbuff.h"
 
 int main(void)
 {
-	// uint8_t data = 0;
-	uint32_t j;
+	uint32_t data, data2, j;
 	circbuffer_t *buffer = NULL;
-	buffer= (circbuffer_t*)malloc(sizeof(circbuffer_t));
+	buffer = (circbuffer_t*)malloc(sizeof(circbuffer_t));
 
 	status stat;
-	stat = allocate_c(&buffer,2);
+	printf("Enter the size of the buffer:\n");
+	scanf("%d", &data);
+	stat = allocate_c(&buffer,data);
 	printf("Allocate status is %d\n", stat);
 
 	uint8_t i = add_c(&buffer, 10);
@@ -21,35 +41,21 @@ int main(void)
 	i = add_c(&buffer, 99);
 	printf("Add status1 is %d\n", i);
 
+	i = add_c(&buffer, 101);
+	printf("Add status2 is %d\n", i);
+
 	j = size(&buffer);
 	printf("Number of itmes in the buffer is %d\n",j);
 
-	// i = remove_c(&buffer, &data);
-	// printf("Remove status is %d\n", i);
+	i = remove_c(&buffer, &data2);
+	printf("Remove status is %d\n", i);
 
-	// i = remove_c(&buffer, &data);
-	// printf("Remove status is %d\n", i);
 	dump_c(&buffer);
-
-	bool k = Is_buffer_Empty(&buffer);
-	printf("Buffer empty status (bool): %d\n", k);
-
-	k = Is_buffer_full(&buffer);
-	printf("Buffer full status (bool): %d\n", k);
-
-
 	return 0;
-
 }
 
-/*******************************************************************/
-/*description: This function adds a new data to the given circular  */
-/*	      buffer						   */
-/*parameter: data to be added, the buffer address  	           */
-/*return:    0 : if the buffer is full and a wrap fill occurs	   */
-/*	     1 : otherwise					   */
-/*******************************************************************/
-uint8_t add_c(circbuffer_t **cptr, uint8_t data)
+
+status add_c(circbuffer_t **cptr, uint8_t data)
 {
 	circbuffer_t *c = *cptr;
 	uint32_t* adr;
@@ -65,24 +71,19 @@ uint8_t add_c(circbuffer_t **cptr, uint8_t data)
 	*c->head = data;
 	c->head = adr;
 	c->count++;
+
 	return SUCCESS;
 }
 
-/*******************************************************************/
-/*description: This function removes the oldest data from the given */
-/*	      circular buffer					             */
-/*parameter: the buffer address and pointer to location where the  */
-/*           data should be kept.				   		 */
-/*return:    0 : if the buffer is empty.			   		 */
-/*	     1 : otherwise					   		 */
-/*******************************************************************/
-uint8_t remove_c(circbuffer_t **cptr, uint8_t *data)
+
+status remove_c(circbuffer_t **cptr, uint32_t *data)
 {
 	circbuffer_t *c = *cptr;
 	uint32_t* adr;
 	if(c->count == 0) 
 	{
-		return (0);
+		printf("Buffer is empty. Nothing to remove\n");
+		return FAILURE;
 	}
 	else 
 	{
@@ -96,34 +97,23 @@ uint8_t remove_c(circbuffer_t **cptr, uint8_t *data)
 		}
 		c->tail = adr;
 		c->count--;
-		return(1);
+		return SUCCESS;
 	}
 	
 }
 
 
-/*******************************************************************/
-/*description: This function tells if the circular buffer is empty  */
-/*parameter: the buffer address 		 	           		 */
-/*return:    1 : if the buffer is empty				   	 */
-/*	     0 : otherwise					   		 */
-/*******************************************************************/
-bool Is_buffer_Empty(circbuffer_t **cptr)
+status Is_buffer_Empty(circbuffer_t **cptr)
 {
 	circbuffer_t *c = *cptr;
 	if (c->count == 0)
-		return 1;
+		return SUCCESS;
 	else 
-		return 0;
+		return FAILURE;
 }
 
-/*******************************************************************/
-/*description: This function tells if the circular buffer is full   */
-/*parameter: the buffer address 		 	           		 */
-/*return:    1 : if the buffer is full				   	 */
-/*	     0 : otherwise					    		 */
-/*******************************************************************/
-bool Is_buffer_full(circbuffer_t **cptr)
+
+status Is_buffer_full(circbuffer_t **cptr)
 {
 	circbuffer_t *c = *cptr;
 	if (c->count == c->size)
@@ -133,11 +123,7 @@ bool Is_buffer_full(circbuffer_t **cptr)
 }
 
 
-/*---------------------------------------------------------------------------
- *uint8_t allocate(circbuffer_t **cptr,uint8_t size)
- *This function is can be used to initialize circular buffer of size "size"
- ---------------------------------------------------------------------------*/
-status allocate_c(circbuffer_t **cptr, uint8_t size)
+status allocate_c(circbuffer_t **cptr, uint32_t size)
 {
 	(*cptr)->buff = (uint32_t*)malloc(sizeof(uint32_t) * size);
     (*cptr)->size = size;						 //total size of buffer
@@ -151,10 +137,7 @@ status allocate_c(circbuffer_t **cptr, uint8_t size)
     	return FAILURE;
 }
 
-/*---------------------------------------------------------------------------
- *status destroy(circbuffer_t *cptr)
- *This function destroys or frees up the heap memory assigned to the buffer
- ---------------------------------------------------------------------------*/
+
 status destroy_c(circbuffer_t **cptr)
 {
 	circbuffer_t *c = *cptr;
