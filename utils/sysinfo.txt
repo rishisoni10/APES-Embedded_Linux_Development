@@ -1,0 +1,7 @@
+Operating System Type: GNU/Linux
+OS Distribution: Ubuntu 16.04.2 LTS
+Kernel Version: 4.4.0-72-generic
+Kernel Build Information: #93-Ubuntu SMP Fri Mar 31 14:07:41 UTC 2017
+GCC Version used for Kernel Build: (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4) )
+Kernel Build Time: Mar 31 14:07:41 UTC 2017
+System Architecture: x86_64
