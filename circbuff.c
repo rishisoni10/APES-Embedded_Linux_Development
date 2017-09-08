@@ -1,5 +1,5 @@
 /*
-* @file double_LL.c
+* @file circbuff.c
 * @brief Circular Buffer Library
 *
 * This source file provides useful functions for creating and using circular 
