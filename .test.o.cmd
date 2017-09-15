@@ -933,6 +933,16 @@ deps_exsyscall/test.o := \
     $(wildcard include/config/cgroup/pids.h) \
     $(wildcard include/config/cgroup/rdma.h) \
     $(wildcard include/config/cgroup/debug.h) \
+  include/linux/slab.h \
+    $(wildcard include/config/debug/slab.h) \
+    $(wildcard include/config/failslab.h) \
+    $(wildcard include/config/have/hardened/usercopy/allocator.h) \
+    $(wildcard include/config/slab.h) \
+    $(wildcard include/config/slub.h) \
+  include/linux/kmemleak.h \
+    $(wildcard include/config/debug/kmemleak.h) \
+  include/linux/kasan.h \
+  include/linux/sort.h \
 
 exsyscall/test.o: $(deps_exsyscall/test.o)
 
