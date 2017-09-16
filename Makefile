@@ -1,1 +1,1 @@
-obj-y:= test.o
+obj-y:= exsyscall.o
