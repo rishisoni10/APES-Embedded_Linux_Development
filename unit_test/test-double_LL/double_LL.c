@@ -21,38 +21,6 @@
 #include <stdlib.h>
 #include "double_LL.h"
 
-// int main(void)
-// {
-//     status stat;
-//     uint32_t *data = NULL, index;
-//     struct Node *head = NULL; 
-//     stat = add_node(&head, 10, 1);
-   
-//     display(&head);
-//     stat = add_node(&head, 11, 1);
-   
-//     display(&head);
-//     stat = add_node(&head, 20, 2);
-   
-//     display(&head);
-//     stat = add_node(&head, 97, 3);
-//     stat = add_node(&head, 28, 4);
-//     display(&head);
-
-//     printf("Status: %d\n", stat);
-//     printf("Number of nodes is: %d\n",size(&head));
-   
-//     remove_node(&head, data, 3);
-//     printf("After removing index 3, list is:\n");
-//     display(&head);
-    
-//     stat = search(&head, 11, &index);
-//     printf("Node index is %d\n", index);
-
-//     stat = destroy(&head);
-//     display(&head);
-
-// }
 
 status add_node(struct Node **head, uint32_t data, uint8_t index)
 {

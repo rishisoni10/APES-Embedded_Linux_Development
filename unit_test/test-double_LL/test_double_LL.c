@@ -1,3 +1,21 @@
+/*
+* @file test_double_LL.c
+* @brief Doubly Linked List Tests using cmocka
+*
+* This source file provides useful tests for testing doubly linked lists. 
+* in a variety of situations. This code can be run on any Linux - based system.
+* Detailed description is given in the README of the git repository, as mentioned in the 
+* Homework - 2 decription
+*
+* Tools used: GCC Compiler, GDB, make
+* Command to compile from source: make test
+*
+* @author Rishi Soni
+* @date September 19 2017
+* @version 1.0
+*
+*/
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -8,6 +26,8 @@
 #include <cmocka.h>
 #include "double_LL.h"
 
+
+//Testing the addition of a predifined number of nodes
 void test_add_node_multiple(void **state)
 {
 	status stat;
@@ -18,11 +38,10 @@ void test_add_node_multiple(void **state)
     	data = i + 33;
     	stat = add_node(&head, data, i);
     }
-    display(&head);
     assert_int_equal(stat,SUCCESS);
 }
 
-
+//Verifying that a data known to be in the DLL exists using the search()
 void test_search_data_exist(void **state)
 {
 	status stat;
@@ -36,6 +55,7 @@ void test_search_data_exist(void **state)
     assert_int_equal(stat,DATA_FOUND);	
 }
 
+//Verifying that a data known to be missing in the DLL does not exist using the search()
 void test_search_data_not_exist(void **state)
 {
 	status stat;
@@ -49,6 +69,7 @@ void test_search_data_not_exist(void **state)
     assert_int_equal(stat,DATA_NOT_FOUND);	
 }
 
+//Verifying that a node can be added at the current head of the DLL
 void test_add_node_head(void **state)
 {
 	status stat;
@@ -71,6 +92,7 @@ void test_add_node_head(void **state)
     assert_int_equal(stat,DATA_FOUND);
 }
 
+//Verifying that a node can be added at the current tail of the DLL
 void test_add_node_tail(void **state)
 {
 	status stat;
@@ -88,7 +110,6 @@ void test_add_node_tail(void **state)
     //Adding element in the end (tail) and checking its status
     stat = add_node(&head, 10, length+1);
     assert_int_equal(stat, SUCCESS);
-    display(&head);
     //Searching the added data in the D_LL
     stat = search(&head, 10, &index);
     //Check if data found at index => head
@@ -97,6 +118,7 @@ void test_add_node_tail(void **state)
     assert_int_equal(stat,DATA_FOUND);
 }
 
+//Verifying that a node can be added anywhere between the head and the tail of the DLL
 void test_add_node_middle(void **state)
 {
 	status stat;
@@ -114,7 +136,6 @@ void test_add_node_middle(void **state)
     //Adding element anywhere in the middle (here, length - 5) and checking its status
     stat = add_node(&head, 10, length - 5);
     assert_int_equal(stat, SUCCESS);
-    display(&head);
     //Searching the added data in the D_LL
     stat = search(&head, 10, &index);
     //Check if data found at index => head
@@ -123,6 +144,7 @@ void test_add_node_middle(void **state)
     assert_int_equal(stat,DATA_FOUND);
 }
 
+//Verifying that the size() returns the correct number of nodes in the DLL
 void test_size(void **state)
 {
 	status stat;
@@ -144,7 +166,7 @@ void test_size(void **state)
     assert_int_equal(9, length);
 }
 
-
+//Verifying that a known existing node can be deleted from the DLL
 void test_remove_node(void **state)
 {
 	status stat;
@@ -162,6 +184,7 @@ void test_remove_node(void **state)
 	assert_int_equal(stat, REMOVE_SUCCESS);
 }
 
+//Verifying that the current head node of the DLL can be deleted
 void test_remove_head_node(void **state)
 {
 	status stat;
@@ -179,6 +202,7 @@ void test_remove_head_node(void **state)
 	assert_int_equal(stat, HEAD_REMOVE_SUCCESS);
 }
 
+//Verifying that the current tail node of the DLL can be deleted
 void test_remove_tail_node(void **state)
 {
 	status stat;
@@ -197,6 +221,7 @@ void test_remove_tail_node(void **state)
 	assert_int_equal(stat, TAIL_REMOVE_SUCCESS);
 }
 
+//Verifying that remove_node() fails when trying to remove from an empty DLL
 void test_remove_node_empty_LL(void **state)
 {
 	status stat;
@@ -206,6 +231,8 @@ void test_remove_node_empty_LL(void **state)
 	assert_int_equal(stat, EMPTY_LL);
 }
 
+
+//Verify that all nodes of the DLL have been deallocated from memory 
 void test_destroy(void **state)
 {
 	status stat;
