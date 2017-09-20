@@ -1,0 +1,9 @@
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/lib/pkgconfig/cmocka.pc
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/lib/cmake/cmocka/cmocka-config.cmake
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/lib/cmake/cmocka/cmocka-config-version.cmake
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/include/cmocka.h
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/include/cmocka_pbc.h
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/lib/libcmocka.so.0.4.0
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/lib/libcmocka.so.0
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/lib/libcmocka.so
+/home/rishisoni/Downloads/unit_tests/3rd-party/build-Debug/lib/libcmocka.a
