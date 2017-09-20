@@ -1,4 +1,20 @@
-//Defining the sorting syscall (#333 in syscall_64.tbl)
+/*
+* @file exsyscall.c
+* @brief Custom system call
+*
+* This source file contains code for a custom system call. Currently, this call sorts a buffer of 
+* random user space data in the kernel space. Code checks if the buffer is in the user space,
+* and not in the kernel space. This system call can be added in any system running a Linux 4.x 
+* kernel.
+*
+* Tools used: GCC Compiler, make
+* How to compile from source: Add the system call in the kernel tree and re-build it.
+*
+* @author Rishi Soni
+* @date September 19 2017
+* @version 1.0
+*
+*/
 #include <linux/syscalls.h>
 #include <linux/kernel.h>
 #include <linux/sched.h>
@@ -12,6 +28,7 @@
 
 int comp_func(const void *low, const void *high);
 
+//Defining the sorting syscall (#333 in syscall_64.tbl)
 SYSCALL_DEFINE3(sorting, __s32*, input_buffer, __s32, size, __s32*, sorted_buffer)
 {
 	printk(KERN_INFO "Entering 'sorting' syscall\n");
@@ -45,7 +62,16 @@ SYSCALL_DEFINE3(sorting, __s32*, input_buffer, __s32, size, __s32*, sorted_buffe
 	long ret = copy_to_user(input_buffer, sorted_buffer, size);
 	if (ret == 0)
 	{
-		printk(KERN_INFO "All elements successfully sorted and supplied back in user space\n");
+		printk(KERN_INFO "All elements success
+
+
+
+
+
+
+
+
+			fully sorted and supplied back in user space\n");
 	}
 	printk(KERN_INFO "Exiting 'sorting' syscall\n");
 	return 0;
