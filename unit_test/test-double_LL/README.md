@@ -1,58 +1,30 @@
-# cmocka example for ECEN 5013
+#Unit Testing Doubly Linked List using cmocka
 
-* [cmocka](https://cmocka.org/)
+To test the DLL functions, the cmocka testing framework was used. The following tests were conducted:
 
-* cmocka [API](https://api.cmocka.org/index.html)
+* test_add_node_multiple: Adding multiple nodes at the same time
+* test_search_data_exist: Check if given data exists
+* test_search_data_not_exist: Check if given data does not exist
+* test_size: Check if the size of the DLL returned is correct
+* test_add_node_head: Add a node to the head and check if successfully added
+* test_add_node_tail: Add a node to the tail and check if successfully added
+* test_add_node_middle: Add a node in the middle and check if successfully added
+* test_remove_node: Remove node at the corresponding index number
+* test_remove_head_node: Remove the head node and verify
+* test_remove_tail_node: Remove the tail node and verify
+* test_remove_node_empty_LL: Check if function work correctly when trying to remove from an empty DLL
+* test_destroy: Check if the memory for the DLL is deallocated successfully. 
 
-cmocka is included in this repository as a git subtree. See
-3rd-party/README.md for details.
+The unit testing tutorial put up on GitHub by Professor Fosdick was used as a reference. Necessary changes were made in the Makefile for building the cmocka libraries and compiling and running the test code. 
 
-## Requirements
+To run the tests, run the following command in the terminal:
 
-* cmake - available through most package managers.
-
-## Build
-
-* building cmocka:
-
-    ```SHELL
-    make cmocka
-    ```
-
-    This will go into the 3rd-party libraries directory and call cmake
-    correctly to build cmocka.
-
-* building and running tests:
-
-    ```SHELL
-    make test
-    ```
-    
-* building main executable
-
-    ```SHELL
-    make all
-    ```
-    
-* cleaing up local build artifacts:
-
-    ```SHELL
-    make clean
-    ```
-    
-* removing all generated files, including 3rd-party builds
-
-    ```SHELL
-    make clobber
-    ```
-    
-## Source
-
-Included source files are:
-
-* quadratic.{h|c} - simple demo library solving quadratic equations.
-
-* test_quadratic.c - unit tests for quadratic solver.
-
-* main.c - simple demo driver using library.
+* Building cmocka
+```SHELL
+make cmocka
+```
+* Building and running test
+```SHELL
+make test
+```
 

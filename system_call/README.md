@@ -1,4 +1,4 @@
-This is the branch for Homework_2. 
+SYSTEM CALL:
 
 The system call has been defined in "exsyscall.c", with the appropriate changes in the Makefile. 
 The syscall table (syscall_64.tbl) has been edited to add a new system call called "sorting" / "sys_sorting", with a system call number of 333 (line 342)
@@ -10,7 +10,7 @@ If the user wants to dump the sorted data, type on the command line:
 
 	./syscall_test print_data
 
-If no data needs to be dumped with just the printing of return status, type on the command line:
+If no data needs to be dumped with just the printing of return status, type the following on the command line:
 
 	./syscall_test
 

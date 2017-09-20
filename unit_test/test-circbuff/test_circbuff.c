@@ -1,3 +1,21 @@
+/*
+* @file test_circbuff.c
+* @brief Testing the Circular Buffer Library using the cmocka framework
+*
+* This source file provides a way for verifying the Circular buffer functionality. The cmocka
+* library has been used for this task. This code can be run on any Linux - based system
+*
+* Tools used: GCC Compiler, make
+* Command to compile from source: make test
+*
+* @Code Example file taken from Professor Fosdick's tutorial files on GitHub
+*
+*
+* @author Rishi Soni
+* @date September 7 2017
+* @version 1.0
+*
+*/
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>

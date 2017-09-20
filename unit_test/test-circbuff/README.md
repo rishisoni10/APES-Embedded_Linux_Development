@@ -1,58 +1,27 @@
-# cmocka example for ECEN 5013
+#Unit Testing Circular Buffer using cmocka
 
-* [cmocka](https://cmocka.org/)
+To test the CB functions, the cmocka testing framework was used. The following tests were conducted:
 
-* cmocka [API](https://api.cmocka.org/index.html)
+* test_allocate: Verfiy memory allocation for the CB
+* test_empty_buffer: Verify if an empty buffer is actually empty using the appropriate function
+* test_full_buffer: Verify if a full buffer is actually full using the appropriate function
+* test_add_data: Verify that data can be added in the CB
+* test_add_when_buffer_full: Verify status when trying to add data to a full CB
+* test_remove_data: Verify remove data operation from CB
+* test_remove_empty_buff: Verify status when trying to remote data from a full CB
+* test_size: Verify that the correct size is returned
+* test_destroy: Verify that CB memory has been freed. 
 
-cmocka is included in this repository as a git subtree. See
-3rd-party/README.md for details.
+The unit testing tutorial put up on GitHub by Professor Fosdick was used as a reference. Necessary changes were made in the Makefile for building the cmocka libraries and compiling and running the test code. 
 
-## Requirements
+To run the tests, run the following command in the terminal:
 
-* cmake - available through most package managers.
-
-## Build
-
-* building cmocka:
-
-    ```SHELL
-    make cmocka
-    ```
-
-    This will go into the 3rd-party libraries directory and call cmake
-    correctly to build cmocka.
-
-* building and running tests:
-
-    ```SHELL
-    make test
-    ```
-    
-* building main executable
-
-    ```SHELL
-    make all
-    ```
-    
-* cleaing up local build artifacts:
-
-    ```SHELL
-    make clean
-    ```
-    
-* removing all generated files, including 3rd-party builds
-
-    ```SHELL
-    make clobber
-    ```
-    
-## Source
-
-Included source files are:
-
-* quadratic.{h|c} - simple demo library solving quadratic equations.
-
-* test_quadratic.c - unit tests for quadratic solver.
-
-* main.c - simple demo driver using library.
+* Building cmocka
+```SHELL
+make cmocka
+```
+* Building and running test
+```SHELL
+make test
+```
 
