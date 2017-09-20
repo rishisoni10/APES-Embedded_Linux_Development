@@ -1,3 +1,20 @@
+/*
+* @file syscall_test.c
+* @brief Custom system call test
+*
+* This source file contains code for testing a custom system call. Currently, this call sorts a buffer of 
+* random user space data in the kernel space. Code checks if the buffer is in the user space,
+* and not in the kernel space. This system call can be added in any system running a Linux 4.x 
+* kernel.
+*
+* Tools used: GCC Compiler, make
+* How to compile from source: gcc -o syscall_test syscall_test.c
+*
+* @author Rishi Soni
+* @date September 19 2017
+* @version 1.0
+*
+*/
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <stdio.h>
