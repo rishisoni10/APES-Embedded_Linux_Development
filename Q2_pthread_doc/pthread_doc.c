@@ -273,7 +273,7 @@ int main(int argc, char const *argv[])
 /* pthread_getattr_default_np
 *  This code creates two threads, and passes two messages, 
 *  corresponding to the thread. Displays the default stack and guard 
-*  sizes using on the terminal.
+*  sizes and displays the results on the terminal.
 *  Compile and run command: make Demo4
 */
 #ifdef Demo_4
@@ -338,6 +338,74 @@ int main(int argc, char const *argv[])
 #endif
 
 
+/* pthread_setattr_default_np
+*  This code creates two threads, and passes two messages, 
+*  corresponding to the thread. Sets the default stack and guard 
+*  sizes 
+*  Compile and run command: make Demo5
+*/
+#ifdef Demo_5
+int main(int argc, char const *argv[])
+{
+    pthread_t thread[NUM_THREADS];
+    long stack_size = -1, guard_size = -1;
+    long stack_size_t = -1, guard_size_t = -1;
+    pthread_attr_t attrp;
+
+    int i;
+    const char *message1 = "Entered Thread 1";
+    const char *message2 = "Entered Thread 2";
+    
+    printf("Demo4 code for pthread_setattr_default_np\n");
+    pthread_attr_init(&attrp);
+    pthread_setattr_default_np(&attrp);
+
+    if (pthread_create(&thread[0], &attrp, print_message_np, (void*)message1))
+    {
+        perror("Thread1 creation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pthread_create(&thread[1], &attrp, print_message_np, (void*)message2))
+    {
+        perror("Thread2 creation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    memset(&attrp, 0, sizeof(attrp));
+    //display thread attributes
+    i = pthread_getattr_default_np(&attrp);
+    if(i != 0)
+    {
+        perror("pthread_getattr_np");
+        exit(1);
+    }
+
+    i = pthread_attr_getguardsize(&attrp, &guard_size);
+    if (i != 0)
+    {
+        perror("pthread_attr_getguardsize");
+        exit(1);   
+    }
+    printf("Guard size = %ld bytes\n", guard_size);
+
+    i = pthread_attr_getstacksize(&attrp, &stack_size);
+    if (i != 0)
+    {
+        perror("pthread_attr_getstacksize");
+        exit(1);   
+    }
+    printf("Stack size = %ld bytes\n", stack_size);
+
+    memset(&attrp, 0, sizeof(attrp));
+    
+    pthread_join(thread[0], NULL);
+    pthread_join(thread[1], NULL);
+
+    exit(EXIT_SUCCESS);
+}
+#endif
+
 
 
 /* Mutex testing (init, lock, unlock, destroy)
@@ -346,7 +414,7 @@ int main(int argc, char const *argv[])
 *  Thread 1 gets access to resource before thread 2
 *  Compile and run command: make Demo5
 */
-#ifdef Demo_5
+#ifdef Demo_6
 int main(int argc, char const *argv[])
 {
     pthread_t thread[NUM_THREADS];
@@ -385,7 +453,7 @@ int main(int argc, char const *argv[])
 *  Thread 1 gets access to resource before Thread 2
 *  Compile and run command: make Demo6
 */
-#ifdef Demo_6
+#ifdef Demo_7
 int main(int argc, char const *argv[])
 {
     pthread_t thread[NUM_THREADS];
@@ -423,12 +491,12 @@ int main(int argc, char const *argv[])
 *  corresponding to the thread. Thread 2 waits for Thread 1 to signal it. 
 *  Compile and run command: make Demo7
 */
-#ifdef Demo_7
+#ifdef Demo_8
 static void *print_message_c1(void *ptr)
 {
     char *msg;
     msg = (char*)ptr;
-    // printf("%s. Thread Number: %ld\n", msg, pthread_self());
+    printf("%s. Thread Number: %ld\n", msg, pthread_self());
     pthread_mutex_lock(&mutex);
     pthread_cond_wait(&cond, &mutex);
     counter++;
@@ -439,7 +507,7 @@ static void *print_message_c2(void *ptr)
 {
     char *msg;
     msg = (char*)ptr;
-    // printf("%s. Thread Number: %ld\n", msg, pthread_self());
+    printf("%s. Thread Number: %ld\n", msg, pthread_self());
     pthread_mutex_lock(&mutex);
     pthread_cond_signal(&cond);
     counter++;
@@ -465,7 +533,7 @@ int main(int argc, char const *argv[])
         exit(EXIT_FAILURE);
     }
 
-    sleep(1);       //Added so that the scheduler does not automatically schedule the threads
+    sleep(1);
 
     if (pthread_create(&thread[1], NULL, print_message_c2, (void*)message2))
     {
@@ -479,6 +547,8 @@ int main(int argc, char const *argv[])
 
     pthread_mutex_destroy(&mutex);
     pthread_cond_destroy(&cond);
+
+
     exit(EXIT_SUCCESS);
 }
 #endif

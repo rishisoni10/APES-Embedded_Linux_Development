@@ -25,6 +25,9 @@ Demo6:
 Demo7:
 	gcc -o pthread_doc pthread_doc.c -DDemo_7 -lpthread
 	./pthread_doc
+Demo8:
+	gcc -o pthread_doc pthread_doc.c -DDemo_8 -lpthread
+	./pthread_doc
 
 clean:
 	rm -rf pthread_doc
