@@ -350,7 +350,7 @@ int main(int argc, char const *argv[])
     pthread_t thread[NUM_THREADS];
     long stack_size = -1, guard_size = -1;
     long stack_size_t = -1, guard_size_t = -1;
-    pthread_attr_t attrp;
+    pthread_attr_t attrp, attr;
 
     int i;
     const char *message1 = "Entered Thread 1";
@@ -374,14 +374,14 @@ int main(int argc, char const *argv[])
 
     memset(&attrp, 0, sizeof(attrp));
     //display thread attributes
-    i = pthread_getattr_default_np(&attrp);
+    i = pthread_getattr_np(thread[0], &attr);
     if(i != 0)
     {
         perror("pthread_getattr_np");
         exit(1);
     }
 
-    i = pthread_attr_getguardsize(&attrp, &guard_size);
+    i = pthread_attr_getguardsize(&attr, &guard_size);
     if (i != 0)
     {
         perror("pthread_attr_getguardsize");
@@ -389,7 +389,7 @@ int main(int argc, char const *argv[])
     }
     printf("Guard size = %ld bytes\n", guard_size);
 
-    i = pthread_attr_getstacksize(&attrp, &stack_size);
+    i = pthread_attr_getstacksize(&attr, &stack_size);
     if (i != 0)
     {
         perror("pthread_attr_getstacksize");
@@ -397,7 +397,7 @@ int main(int argc, char const *argv[])
     }
     printf("Stack size = %ld bytes\n", stack_size);
 
-    memset(&attrp, 0, sizeof(attrp));
+    memset(&attrp, 0, sizeof(attr));
     
     pthread_join(thread[0], NULL);
     pthread_join(thread[1], NULL);

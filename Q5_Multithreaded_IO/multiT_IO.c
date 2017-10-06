@@ -152,6 +152,8 @@ int main(int argc, char const *argv[])
 	
 
 	printf("Enter the file contents\n");
+	printf("Press Ctrl + D to exit file...\n");
+	
 	while(fgets(sentence, MAX_CHAR, stdin) != NULL)
 	{
 		fwrite(sentence, 1, strlen(sentence), fp);
