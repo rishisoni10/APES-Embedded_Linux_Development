@@ -1,3 +1,7 @@
+Problem Statement: 
+
+Create your own kernel module with init and exit routines that print to the kernel buffer that you have loaded or removed the module. Define necessary file macros and makefiles to install the kernel module. Your kernel module needs to use a kernel timer to wake up every 500msec. Each time the timer wakes up you should call a function that prints to kernel log buffers a count of how many times the timer has fired. Declare a statically allocated variable to track this count in your callback.
+
 KERNEL MODULES:
 
 - To create a kernel module, define a entry function and an exit function. 
